@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>צור משלוח</title>
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+  <header class="main-header">
+    <!-- Navigation Links -->
+    <div class="header-item left">
+      <a href="signup.html" class="header-link">הרשמה</a>
+      <a href="login.html" class="header-link">התחברות</a>
+    </div>
+    <div class="header-item center">
+      <a href="create-delivery.html" class="header-link">צור משלוח</a>
+    </div>
+    <div class="header-item right">
+      <a href="index.html" class="header-link">חבומרקט</a>
+    </div>
+  </header>
+
+  <div class="form-container">
+    <h1>צור משלוח</h1>
+
+    <!-- Form Section -->
+    <form>
+      <!-- First Row -->
+      <div class="form-row">
+        <div class="form-group">
+            <label for="password">סיסמה</label>
+            <input type="password" id="password">
+          </div>
+        <div class="form-group">
+          <label for="email">אימייל</label>
+          <input type="email" id="email">
+        </div>
+
+      </div>
+
+      <!-- Second Row -->
+      <div class="form-row">
+        <div class="form-group">
+            <label for="phone">מספר טלפון</label>
+            <input type="tel" id="phone">
+          </div>
+        <div class="form-group">
+          <label for="name">שם</label>
+          <input type="text" id="name">
+        </div>
+
+      </div>
+
+      <!-- Third Row -->
+      <div class="form-row">
+        
+        <div class="form-group">
+            <label for="number">מספר</label>
+            <input type="text" id="number">
+          </div>
+        <div class="form-group">
+            <label for="street">רחוב</label>
+            <input type="text" id="street">
+          </div>
+        <div class="form-group">
+          <label for="city">עיר</label>
+          <input type="text" id="city">
+        </div>
+
+      </div>
+
+      <!-- Fourth Row -->
+      <div class="form-row">
+        <div class="form-group full-width">
+          <label for="supermarket">סופר מועדף</label>
+          <select id="supermarket">
+            <option value="A">רמי לוי</option>
+            <option value="B">שופרסל</option>
+            <option value="C">ויקטורי</option>
+            <option value="D">מחסני השוק</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="delivery-action-btn">הרשמה</button>
+    </form>
+  </div>
+</body>
+</html>

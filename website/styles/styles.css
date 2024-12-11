@@ -60,7 +60,7 @@ body {
   /* Headings */
   .text-container {
     text-align: right; /* Center-align the text */
-    margin: 150px 900px 0 0; /* Center horizontally with auto */
+    margin: 150px 800px 0 0; /* Center horizontally with auto */
   }
   
   h1, h2 {
@@ -75,7 +75,8 @@ body {
   
   /* Buttons */
   .button-container {
-    margin-top: 2rem;
+    margin-top: 3rem;
+    margin-left: 8rem;
     display: flex;
     justify-content: center; /* Center buttons horizontally */
     gap: 4rem; /* Add spacing between buttons */
@@ -93,6 +94,79 @@ body {
   }
   
   .action-btn:hover {
+    background-color: #2f4a3e;
+  }
+  
+  /* Form Container */
+.form-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: right; /* Align text to the right for Hebrew */
+  }
+  
+  .form-container h1 {
+    font-family: 'Assistant', sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    text-align: center;
+    margin-top: 0;
+  }
+  
+  /* Form Rows */
+  .form-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    font-family: 'Assistant', sans-serif;
+    font-weight: 600;
+    margin-bottom: 5px;
+    text-align: right;
+  }
+  
+  .form-group input,
+  .form-group select {
+    padding: 10px;
+    border: 3px solid #c4c4c4;
+    border-radius: 500px;
+    font-family: 'Assistant', sans-serif;
+    font-size: 1rem;
+    text-align: right;
+
+  }
+  
+  .form-group.full-width {
+    flex: 1 1 100%;
+  }
+  
+  /* Submit Button */
+  .delivery-action-btn {
+    background-color: #416655;
+    color: white;
+    font-family: 'Assistant', sans-serif;
+    font-size: 1rem;
+    border: none;
+    border-radius: 500px;
+    padding: 10px;
+    cursor: pointer;
+    width: 30%;
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */  
+    margin: 20px auto;
+  }
+  
+  .delivery-action-btn:hover {
     background-color: #2f4a3e;
   }
   
