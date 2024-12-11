@@ -1,0 +1,98 @@
+/* Body Styling */
+body {
+    margin: 0;
+    background-color: #d8dcd6;
+    font-family: 'Assistant', sans-serif;
+  }
+  
+  /* Background Image */
+  .bg-img {
+    display: block; /* Ensure it behaves as a block element */
+    width: 42rem;
+    max-width: 100%; /* Ensure responsiveness */
+    margin-top: 120px; /* Adjust spacing */
+    position: absolute; /* Align it relative to the viewport */
+    right: 0; /* Align to the right */
+    top: 0; /* Align to the top of the page */
+  }
+  
+  /* Header Styling */
+  .main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    font-family: 'Assistant', sans-serif;
+    font-size: 1.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    color: black;
+  }
+  
+  .header-item {
+    flex: 1;
+  }
+  
+  .header-item.right {
+    text-align: right;
+  }
+  
+  .header-item.center {
+    text-align: center;
+  }
+  
+  .header-item.left {
+    text-align: left;
+  }
+  
+  .header-link {
+    margin: 0 0.5rem;
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .header-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Headings */
+  .text-container {
+    text-align: right; /* Center-align the text */
+    margin: 150px 900px 0 0; /* Center horizontally with auto */
+  }
+  
+  h1, h2 {
+    font-family: 'Assistant', sans-serif;
+    font-weight: 700;
+  }
+  
+  h2 {
+    font-size: 1.3rem;
+    direction: rtl;
+  }
+  
+  /* Buttons */
+  .button-container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    gap: 4rem; /* Add spacing between buttons */
+  }
+  
+  .action-btn {
+    background-color: #416655;
+    color: white;
+    font-family: 'Assistant', sans-serif;
+    font-size: 1rem;
+    border: none;
+    border-radius: 500px;
+    padding: 0.5rem 2rem;
+    cursor: pointer;
+  }
+  
+  .action-btn:hover {
+    background-color: #2f4a3e;
+  }
+  
