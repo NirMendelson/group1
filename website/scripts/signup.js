@@ -131,10 +131,10 @@ document.addEventListener('DOMContentLoaded', () => {
             successMessage.textContent = 'נרשמת בהצלחה';
             successMessage.classList.add('show');
 
-            // Fade the success message after 4 seconds
+            // Redirect to homepage after 2 seconds
             setTimeout(() => {
-                successMessage.classList.remove('show');
-            }, 4000);
+                window.location.href = 'index.html'; // Replace with the actual path to your homepage
+            }, 2000);
         }
     });
 
