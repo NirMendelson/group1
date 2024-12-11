@@ -82,20 +82,7 @@ body {
     gap: 4rem; /* Add spacing between buttons */
   }
   
-  .action-btn {
-    background-color: #416655;
-    color: white;
-    font-family: 'Assistant', sans-serif;
-    font-size: 1rem;
-    border: none;
-    border-radius: 500px;
-    padding: 0.5rem 2rem;
-    cursor: pointer;
-  }
-  
-  .action-btn:hover {
-    background-color: #2f4a3e;
-  }
+
   
   /* Form Container */
 .form-container {
@@ -151,7 +138,7 @@ body {
   }
   
   /* Submit Button */
-  .delivery-action-btn {
+  .action-btn {
     background-color: #416655;
     color: white;
     font-family: 'Assistant', sans-serif;
@@ -166,7 +153,33 @@ body {
     margin: 20px auto;
   }
   
-  .delivery-action-btn:hover {
+  .action-btn:hover {
     background-color: #2f4a3e;
   }
   
+/* Error Message */
+.error-message {
+    color: red;
+    font-family: 'Assistant', sans-serif;
+    font-size: 1.5rem;
+    margin-top: 10px;
+    text-align: center;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.5s ease; /* Smooth transition for fading */
+  }
+  
+/* Success Message */
+.success-message {
+    color: green;
+    font-family: 'Assistant', sans-serif;
+    font-size: 1.5rem;
+    margin-top: 10px;
+    text-align: center;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.5s ease; /* Smooth transition for fading */
+}
+
+.success-message.show {
+    opacity: 1; /* Fully visible */
+    visibility: visible; /* Ensure it's shown */
+}
