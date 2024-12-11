@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>הרשמה</title>
     <link rel="stylesheet" href="styles/styles.css" />
-
   </head>
   <body>
     <header class="main-header">
@@ -26,7 +25,7 @@
       <h1>הרשמה</h1>
 
       <!-- Form Section -->
-      <form>
+      <form id="signup-form">
         <!-- First Row -->
         <div class="form-row">
           <div class="form-group">
@@ -72,20 +71,27 @@
           <div class="form-group full-width">
             <label for="supermarket">סופר מועדף</label>
             <select id="supermarket">
-              <option value="A">רמי לוי</option>
-              <option value="B">שופרסל</option>
-              <option value="C">ויקטורי</option>
-              <option value="D">מחסני השוק</option>
+              <option value="">בחר סופר</option>
+              <option value="רמי לוי">רמי לוי</option>
+              <option value="שופרסל">שופרסל</option>
+              <option value="ויקטורי">ויקטורי</option>
+              <option value="מחסני השוק">מחסני השוק</option>
             </select>
           </div>
         </div>
 
         <!-- Submit Button -->
         <button type="submit" class="action-btn">הרשמה</button>
+
+        <!-- Error Message Placeholder -->
+        <div id="error-message" class="error-message"></div>
+
+        <!-- Success Message Placeholder -->
+        <div id="success-message" class="success-message"></div>
       </form>
     </div>
 
-      <!-- Scripts -->
+    <!-- Scripts -->
     <script src="scripts/shared.js"></script>
     <script src="scripts/signup.js"></script>
   </body>
