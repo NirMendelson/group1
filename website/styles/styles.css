@@ -3,21 +3,21 @@ body {
     margin: 0;
     background-color: #d8dcd6;
     font-family: 'Assistant', sans-serif;
-  }
-  
-  /* Background Image */
-  .bg-img {
-    display: block; /* Ensure it behaves as a block element */
+}
+
+/* Background Image */
+.bg-img {
+    display: block;
     width: 42rem;
-    max-width: 100%; /* Ensure responsiveness */
-    margin-top: 120px; /* Adjust spacing */
-    position: absolute; /* Align it relative to the viewport */
-    right: 0; /* Align to the right */
-    top: 0; /* Align to the top of the page */
-  }
-  
-  /* Header Styling */
-  .main-header {
+    max-width: 100%;
+    margin-top: 120px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+/* Header Styling */
+.main-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -28,117 +28,115 @@ body {
     top: 0;
     z-index: 1000;
     color: black;
-  }
-  
-  .header-item {
+    background-color: #d8dcd6; /* Ensure header remains visible on scroll */
+}
+
+.header-item {
     flex: 1;
-  }
-  
-  .header-item.right {
+}
+
+.header-item.right {
     text-align: right;
-  }
-  
-  .header-item.center {
+}
+
+.header-item.center {
     text-align: center;
-  }
-  
-  .header-item.left {
+}
+
+.header-item.left {
     text-align: left;
-  }
-  
-  .header-link {
+}
+
+.header-link {
     margin: 0 0.5rem;
     color: black;
     text-decoration: none;
     font-weight: 500;
-  }
-  
-  .header-link:hover {
+}
+
+.header-link:hover {
     text-decoration: underline;
-  }
-  
-  /* Headings */
-  .text-container {
-    text-align: right; /* Center-align the text */
-    margin: 150px 800px 0 0; /* Center horizontally with auto */
-  }
-  
-  h1, h2 {
+}
+
+/* Headings */
+.text-container {
+    text-align: right;
+    margin: 150px 800px 0 0;
+}
+
+h1, h2 {
     font-family: 'Assistant', sans-serif;
     font-weight: 700;
-  }
-  
-  h2 {
+}
+
+h2 {
     font-size: 1.3rem;
     direction: rtl;
-  }
-  
-  /* Buttons */
-  .button-container {
+}
+
+/* Buttons */
+.button-container {
     margin-top: 3rem;
     margin-left: 8rem;
     display: flex;
-    justify-content: center; /* Center buttons horizontally */
-    gap: 4rem; /* Add spacing between buttons */
-  }
-  
+    justify-content: center;
+    gap: 4rem;
+}
 
-  
-  /* Form Container */
+/* Form Container */
 .form-container {
     max-width: 600px;
     margin: 50px auto;
     padding: 20px;
     border-radius: 10px;
-    text-align: right; /* Align text to the right for Hebrew */
-  }
-  
-  .form-container h1 {
+    text-align: right;
+}
+
+.form-container h1 {
     font-family: 'Assistant', sans-serif;
     font-weight: 700;
     font-size: 2.5rem;
     margin-bottom: 40px;
     text-align: center;
     margin-top: 0;
-  }
-  
-  /* Form Rows */
-  .form-row {
+}
+
+/* Form Rows */
+.form-row {
     display: flex;
     gap: 10px;
     margin-bottom: 15px;
-  }
-  
-  .form-group {
+}
+
+.form-group {
     flex: 1;
     display: flex;
     flex-direction: column;
-  }
-  
-  .form-group label {
+}
+
+.form-group label {
     font-family: 'Assistant', sans-serif;
     font-weight: 600;
     margin-bottom: 5px;
     text-align: right;
-  }
-  
-  .form-group input,
-  .form-group select {
+}
+
+.form-group input,
+.form-group select {
     padding: 10px;
     border: 3px solid #c4c4c4;
     border-radius: 500px;
     font-family: 'Assistant', sans-serif;
     font-size: 1rem;
     text-align: right;
+}
 
-  }
-  
-  .form-group.full-width {
+.form-group.full-width {
     flex: 1 1 100%;
-  }
-  
-  /* Submit Button */
-  .action-btn {
+}
+
+/* Submit Button */
+.action-btn {
     background-color: #416655;
     color: white;
     font-family: 'Assistant', sans-serif;
@@ -149,14 +147,15 @@ body {
     cursor: pointer;
     width: 30%;
     display: flex;
-    justify-content: center; /* Center buttons horizontally */  
+    justify-content: center;
     margin: 20px auto;
-  }
-  
-  .action-btn:hover {
+    min-width: 120px;
+}
+
+.action-btn:hover {
     background-color: #2f4a3e;
-  }
-  
+}
+
 /* Error Message */
 .error-message {
     color: red;
@@ -164,10 +163,10 @@ body {
     font-size: 1.5rem;
     margin-top: 10px;
     text-align: center;
-    opacity: 0; /* Initially hidden */
-    transition: opacity 0.5s ease; /* Smooth transition for fading */
-  }
-  
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
 /* Success Message */
 .success-message {
     color: green;
@@ -175,11 +174,116 @@ body {
     font-size: 1.5rem;
     margin-top: 10px;
     text-align: center;
-    opacity: 0; /* Initially hidden */
-    transition: opacity 0.5s ease; /* Smooth transition for fading */
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
 .success-message.show {
-    opacity: 1; /* Fully visible */
-    visibility: visible; /* Ensure it's shown */
+    opacity: 1;
+    visibility: visible;
+}
+
+
+
+
+
+
+@media (min-width: 1600px) {
+    .text-container {
+        margin: 150px 1000px 0 0;
+    }
+
+    .bg-img {
+        width: 50rem;
+    }
+
+    .main-header {
+        font-size: 1.4rem;
+    }
+
+    .form-container {
+        max-width: 700px;
+    }
+}
+
+/* Media Queries for Responsiveness */
+@media (min-width: 1300px) {
+   
+    .bg-img {
+        width: 50%;
+    }
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1100px) {
+    .main-header {
+        padding: 1rem;
+    }
+
+    .header-item {
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .text-container {
+        margin: 20px auto 0; /* Center and place below the image */
+        text-align: center; /* Align text centrally */
+        position: relative; /* Ensure it stays in the document flow */
+    }
+
+    .button-container {
+        margin: 0;
+        gap: 0;
+    }
+
+    .bg-img {
+        position: relative; /* Keeps it in flow but adjustable */
+        display: block; /* Ensures it behaves like a block element */
+        margin: 0 0 0 auto; /* Align to the right while staying responsive */
+        width: 80%; /* Adjust width for smaller screens */
+    }
+}
+
+
+
+
+
+
+
+
+@media (max-width: 550px) {
+    .main-header {
+        font-size: 16px;
+    }
+
+    .text-container {
+        padding: 0 5%;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+
+
+
+}
+
+@media (max-width: 432px) {
+    .main-header {
+        font-size: 14px;
+    }
+
+    
+    .header-item {
+        display: flex; /* Ensure flexbox layout for consistent spacing */
+        justify-content: center; /* Center align buttons */
+        gap: 0; /* Add small gap instead of using margin */
+    }
+
+
+
 }
