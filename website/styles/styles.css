@@ -206,13 +206,7 @@ h2 {
     }
 }
 
-/* Media Queries for Responsiveness */
-@media (min-width: 1300px) {
-   
-    .bg-img {
-        width: 50%;
-    }
-}
+
 
 /* Media Queries for Responsiveness */
 @media (max-width: 1100px) {
@@ -244,11 +238,15 @@ h2 {
     }
 }
 
+@media (max-width: 630px) {
+    .form-row {
+        flex-direction: column;
+    }
 
-
-
-
-
+    .form-group {
+        margin-bottom: 10px;
+    }
+}
 
 
 @media (max-width: 550px) {
@@ -277,13 +275,9 @@ h2 {
         font-size: 14px;
     }
 
-    
     .header-item {
         display: flex; /* Ensure flexbox layout for consistent spacing */
         justify-content: center; /* Center align buttons */
         gap: 0; /* Add small gap instead of using margin */
     }
-
-
-
 }
