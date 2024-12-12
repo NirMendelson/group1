@@ -67,8 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (
             valid &&
             (!/^.{8,}$/.test(passwordValue) || // Minimum 8 characters
-             !/[a-zA-Z]/.test(passwordValue) || // At least one letter
-             !/\d/.test(passwordValue)) // At least one number
+                !/[a-zA-Z]/.test(passwordValue) || // At least one letter
+                !/\d/.test(passwordValue)) // At least one number
         ) {
             passwordInput.setCustomValidity(
                 'Password must be at least 8 characters long and include at least one letter and one number.'

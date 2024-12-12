@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const deliveryForm = document.getElementById('delivery-form');
     const errorMessage = document.getElementById('error-message');
-  
+
     deliveryForm.addEventListener('submit', (event) => {
         const supermarket = document.getElementById('supermarket').value;
         const date = document.getElementById('date').value;
