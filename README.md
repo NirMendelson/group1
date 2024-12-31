@@ -29,8 +29,8 @@ The site is fully responsive, ensuring a seamless experience on desktops, tablet
 After creating a delivery offer, users see a loading animation featuring:
 - A spinning circle.
 - Three changing messages, displayed every 2 seconds:
-  1. "נתונים התקבלו"
-  2. "שולח התראות למשתמשים בסביבתך"
-  3. "פרטי המשלוח נשלחו, משתמשים שרוצים להצטרף להזמנה יצרו איתך קשר"
+  1. "Data received"
+  2. "Sending notifications to nearby users"
+  3. "Delivery details sent, users who want to join will contact you"
 
 This animation makes the process of creating a delivery offer more engaging and clear.
