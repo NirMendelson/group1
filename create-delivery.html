@@ -8,7 +8,6 @@
   </head>
   <body>
     <header class="main-header">
-      <!-- Navigation Links -->
       <div class="header-item left">
         <a href="signup.html" class="header-link">הרשמה</a>
         <a href="login.html" class="header-link">התחברות</a>
@@ -20,13 +19,12 @@
         <a href="index.html" class="header-link">חבומרקט</a>
       </div>
     </header>
+    
 
     <div class="form-container">
       <h1>צור משלוח</h1>
 
-      <!-- Form Section -->
       <form id="delivery-form">
-        <!-- First Row -->
         <div class="form-row">
           <div class="form-group full-width">
             <label for="supermarket">סופר</label>
@@ -40,7 +38,6 @@
           </div>
         </div>
 
-        <!-- Second Row -->
         <div class="form-row">
           <div class="form-group">
             <label for="date">תאריך</label>
@@ -52,21 +49,18 @@
           </div>
         </div>
 
-        <!-- Submit Button -->
         <button type="submit" class="action-btn">צור משלוח</button>
 
-        <!-- Error Message Placeholder -->
         <div id="error-message" class="error-message"></div>
-
-        <!-- Success Message Placeholder -->
         <div id="success-message" class="success-message"></div>
       </form>
     </div>
 
-    <!-- Success Message Placeholder -->
-    <div id="success-message" class="success-message"></div>
+    <div id="loading-container" class="loading-container" style="display: none;">
+      <div class="loading-circle"></div>
+      <div id="loading-message" class="loading-message">נתונים התקבלו</div>
+    </div>
 
-    <!-- Scripts -->
     <script src="scripts/create-delivery.js"></script>
   </body>
 </html>

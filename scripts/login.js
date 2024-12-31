@@ -5,14 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMessage = document.createElement('div');
     const successMessage = document.createElement('div');
 
-    // Add dynamic error and success messages
+    // Add error and success messages dynamically
     errorMessage.className = 'error-message';
     successMessage.className = 'success-message';
     loginForm.appendChild(errorMessage);
     loginForm.appendChild(successMessage);
 
     loginForm.addEventListener('submit', (event) => {
-        // Clear any previous custom validation messages
+        // Reset previous validation messages
         emailInput.setCustomValidity('');
         passwordInput.setCustomValidity('');
         errorMessage.textContent = '';
@@ -22,8 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let valid = true;
 
-        // Validate email using built-in browser validation
-        const emailValue = emailInput.value.trim();
+        // Validate email
         if (!emailInput.validity.valid) {
             emailInput.setCustomValidity('Please enter a valid email address.');
             emailInput.reportValidity();
@@ -46,27 +45,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (!valid) {
-            event.preventDefault(); // Prevent form submission if any validation fails
+            // Show error message
+            event.preventDefault();
             errorMessage.textContent = 'אנא מלא את כל הפרטים';
             errorMessage.style.opacity = '1';
-
-            // Fade the error message after 4 seconds
             setTimeout(() => {
                 errorMessage.style.opacity = '0';
             }, 4000);
         } else {
-            event.preventDefault(); // Prevent default form submission for demo
+            // Show success message and redirect
+            event.preventDefault();
             successMessage.textContent = 'ההתחברות הושלמה';
             successMessage.classList.add('show');
-
-            // Redirect to homepage after 3 seconds
             setTimeout(() => {
-                window.location.href = 'index.html'; // Replace with the actual path to your homepage
+                window.location.href = 'index.html';
             }, 2000);
         }
     });
 
-    // Clear custom messages on input changes
+    // Clear custom validation messages on input
     [emailInput, passwordInput].forEach((input) => {
         input.addEventListener('input', () => {
             input.setCustomValidity('');

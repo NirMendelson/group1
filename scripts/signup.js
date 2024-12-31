@@ -12,13 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const successMessage = document.getElementById('success-message');
 
     signupForm.addEventListener('submit', (event) => {
-        // Clear any previous custom validation messages
-        emailInput.setCustomValidity('');
-        passwordInput.setCustomValidity('');
-        cityInput.setCustomValidity('');
-        streetInput.setCustomValidity('');
-        numberInput.setCustomValidity('');
-        nameInput.setCustomValidity('');
+        // Reset validation messages and feedback
+        [emailInput, passwordInput, cityInput, streetInput, numberInput, nameInput].forEach(input => input.setCustomValidity(''));
         errorMessage.textContent = '';
         errorMessage.style.opacity = '0';
         successMessage.textContent = '';
@@ -27,15 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let valid = true;
 
         // Check if all fields are filled
-        const inputs = [
-            phoneInput,
-            emailInput,
-            nameInput,
-            passwordInput,
-            numberInput,
-            streetInput,
-            cityInput,
-        ];
+        const inputs = [phoneInput, emailInput, nameInput, passwordInput, numberInput, streetInput, cityInput];
         for (const input of inputs) {
             if (!input.value.trim()) {
                 input.setCustomValidity('This field cannot be left empty.');
@@ -46,103 +33,80 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Validate phone number
-        const phoneValue = phoneInput.value.trim();
-        if (valid && !/^[0]\d+$/.test(phoneValue)) {
-            phoneInput.setCustomValidity(
-                'Phone number must start with 0 and contain only digits.'
-            );
+        if (valid && !/^[0]\d+$/.test(phoneInput.value.trim())) {
+            phoneInput.setCustomValidity('Phone number must start with 0 and contain only digits.');
             phoneInput.reportValidity();
             valid = false;
         }
 
-        // Validate email using built-in browser validation
-        if (valid && !emailInput.validity.valid) {
-            emailInput.setCustomValidity('Please include a valid email address.');
+        // Validate email
+        if (valid && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value.trim())) {
+            emailInput.setCustomValidity('Please enter a valid email address with "@" and a domain (e.g., .com).');
             emailInput.reportValidity();
             valid = false;
         }
 
         // Validate password
-        const passwordValue = passwordInput.value.trim();
-        if (
-            valid &&
-            (!/^.{8,}$/.test(passwordValue) || // Minimum 8 characters
-                !/[a-zA-Z]/.test(passwordValue) || // At least one letter
-                !/\d/.test(passwordValue)) // At least one number
-        ) {
-            passwordInput.setCustomValidity(
-                'Password must be at least 8 characters long and include at least one letter and one number.'
-            );
+        if (valid && (!/^.{8,}$/.test(passwordInput.value.trim()) || !/[a-zA-Z]/.test(passwordInput.value.trim()) || !/\d/.test(passwordInput.value.trim()))) {
+            passwordInput.setCustomValidity('Password must be at least 8 characters long and include at least one letter and one number.');
             passwordInput.reportValidity();
             valid = false;
         }
 
         // Validate supermarket selection
-        const supermarketValue = supermarketSelect.value.trim();
-        if (valid && !supermarketValue) {
+        if (valid && !supermarketSelect.value.trim()) {
             supermarketSelect.setCustomValidity('Please select a preferred supermarket.');
             supermarketSelect.reportValidity();
             valid = false;
         }
 
         // Validate city contains only Hebrew letters
-        const cityValue = cityInput.value.trim();
-        if (valid && !/^[\u0590-\u05FF\s]+$/.test(cityValue)) {
+        if (valid && !/^[\u0590-\u05FF\s]+$/.test(cityInput.value.trim())) {
             cityInput.setCustomValidity('City must contain only Hebrew letters.');
             cityInput.reportValidity();
             valid = false;
         }
 
         // Validate street contains only Hebrew letters
-        const streetValue = streetInput.value.trim();
-        if (valid && !/^[\u0590-\u05FF\s]+$/.test(streetValue)) {
+        if (valid && !/^[\u0590-\u05FF\s]+$/.test(streetInput.value.trim())) {
             streetInput.setCustomValidity('Street must contain only Hebrew letters.');
             streetInput.reportValidity();
             valid = false;
         }
 
         // Validate number contains only digits
-        const numberValue = numberInput.value.trim();
-        if (valid && !/^\d+$/.test(numberValue)) {
+        if (valid && !/^\d+$/.test(numberInput.value.trim())) {
             numberInput.setCustomValidity('Number must contain only numeric digits.');
             numberInput.reportValidity();
             valid = false;
         }
 
         // Validate name contains only Hebrew letters
-        const nameValue = nameInput.value.trim();
-        if (valid && !/^[\u0590-\u05FF\s]+$/.test(nameValue)) {
+        if (valid && !/^[\u0590-\u05FF\s]+$/.test(nameInput.value.trim())) {
             nameInput.setCustomValidity('Name must contain only Hebrew letters.');
             nameInput.reportValidity();
             valid = false;
         }
 
         if (!valid) {
-            event.preventDefault(); // Prevent form submission if any validation fails
+            event.preventDefault();
             errorMessage.textContent = 'אנא מלא את כל הפרטים';
             errorMessage.style.opacity = '1';
-
-            // Fade the error message after 4 seconds
             setTimeout(() => {
                 errorMessage.style.opacity = '0';
             }, 4000);
         } else {
-            event.preventDefault(); // Prevent default form submission for demo
+            event.preventDefault();
             successMessage.textContent = 'נרשמת בהצלחה';
             successMessage.classList.add('show');
-
-            // Redirect to homepage after 2 seconds
             setTimeout(() => {
-                window.location.href = 'index.html'; // Replace with the actual path to your homepage
+                window.location.href = 'index.html';
             }, 2000);
         }
     });
 
-    // Clear custom messages on input changes
-    const inputs = [phoneInput, emailInput, passwordInput, supermarketSelect, cityInput, streetInput, numberInput, nameInput];
-    inputs.forEach((input) => {
-        input.addEventListener('input', () => {
-            input.setCustomValidity('');
-        });
+    // Clear validation messages on input changes
+    [phoneInput, emailInput, passwordInput, supermarketSelect, cityInput, streetInput, numberInput, nameInput].forEach(input => {
+        input.addEventListener('input', () => input.setCustomValidity(''));
     });
 });
