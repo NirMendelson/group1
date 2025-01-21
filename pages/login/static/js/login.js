@@ -11,55 +11,42 @@ document.addEventListener('DOMContentLoaded', () => {
     loginForm.appendChild(errorMessage);
     loginForm.appendChild(successMessage);
 
-    loginForm.addEventListener('submit', (event) => {
-        // Reset previous validation messages
-        emailInput.setCustomValidity('');
-        passwordInput.setCustomValidity('');
-        errorMessage.textContent = '';
-        errorMessage.style.opacity = '0';
-        successMessage.textContent = '';
-        successMessage.classList.remove('show');
+    loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
 
-        let valid = true;
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
 
-        // Validate email
-        if (!emailInput.validity.valid) {
-            emailInput.setCustomValidity('Please enter a valid email address.');
-            emailInput.reportValidity();
-            valid = false;
-        }
-
-        // Validate password
-        const passwordValue = passwordInput.value.trim();
-        if (
-            valid &&
-            (!/^.{8,}$/.test(passwordValue) || // Minimum 8 characters
-                !/[a-zA-Z]/.test(passwordValue) || // At least one letter
-                !/\d/.test(passwordValue)) // At least one number
-        ) {
-            passwordInput.setCustomValidity(
-                'Password must be at least 8 characters long and include at least one letter and one number.'
-            );
-            passwordInput.reportValidity();
-            valid = false;
-        }
-
-        if (!valid) {
-            // Show error message
-            event.preventDefault();
+        if (!email || !password) {
             errorMessage.textContent = 'אנא מלא את כל הפרטים';
             errorMessage.style.opacity = '1';
-            setTimeout(() => {
-                errorMessage.style.opacity = '0';
-            }, 4000);
-        } else {
-            // Show success message and redirect
-            event.preventDefault();
-            successMessage.textContent = 'ההתחברות הושלמה';
-            successMessage.classList.add('show');
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 2000);
+            setTimeout(() => (errorMessage.style.opacity = '0'), 4000);
+            return;
+        }
+
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                successMessage.textContent = 'ההתחברות הושלמה';
+                successMessage.classList.add('show');
+                setTimeout(() => {
+                    window.location.href = '/'; 
+                }, 2000);
+            } else {
+                errorMessage.textContent = result.message;
+                errorMessage.style.opacity = '1';
+                setTimeout(() => (errorMessage.style.opacity = '0'), 4000);
+            }
+        } catch (error) {
+            errorMessage.textContent = 'שגיאה בשרת. נסה שוב מאוחר יותר.';
+            errorMessage.style.opacity = '1';
+            setTimeout(() => (errorMessage.style.opacity = '0'), 4000);
         }
     });
 

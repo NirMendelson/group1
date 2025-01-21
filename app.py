@@ -18,8 +18,9 @@ app.register_blueprint(signup_bp, url_prefix='/signup')      # Routes under /sig
 app.register_blueprint(login_bp, url_prefix='/login')        # Routes under /login
 app.register_blueprint(index_bp, url_prefix='/')             # Routes under /
 
-# Pass the database to blueprints (if required)
-signup_bp.db = db  # Example of passing the database to a blueprint
+# Pass the database to each blueprint
+signup_bp.db = db
+login_bp.db = db
 
 # Run the Flask App
 if __name__ == "__main__":

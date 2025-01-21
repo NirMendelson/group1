@@ -33,3 +33,8 @@
     flex: 1 1 100%;
   }
   
+  .action-btn {
+    display: block;
+    margin: 0 auto;
+  }
+  
