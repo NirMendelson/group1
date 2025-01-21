@@ -1,9 +1,16 @@
-from utilities.db_connector import get_db
+from flask import Flask
+from flask_cors import CORS
+from pages.delivery.delivery import delivery_bp
 
-def test_connection():
-    db = get_db()
-    # Test by listing collections
-    print("Collections:", db.list_collection_names())
+app = Flask(__name__)
+CORS(app)  # Enable CORS if needed
+
+# Register the Blueprint for delivery
+app.register_blueprint(delivery_bp, url_prefix='/delivery')
+
+@app.route('/')
+def index():
+    return "Server is running!"
 
 if __name__ == "__main__":
-    test_connection()
+    app.run(host="127.0.0.1", port=5000, debug=True)

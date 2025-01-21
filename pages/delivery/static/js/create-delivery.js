@@ -1,10 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const deliveryForm = document.getElementById('delivery-form');
     const errorMessage = document.getElementById('error-message');
+    const successMessage = document.getElementById('success-message');
     const loadingContainer = document.getElementById('loading-container');
     const loadingMessage = document.getElementById('loading-message');
 
-    deliveryForm.addEventListener('submit', (event) => {
+    deliveryForm.addEventListener('submit', async (event) => {
+        event.preventDefault(); // Prevent the default form submission behavior
+
         const supermarket = document.getElementById('supermarket').value;
         const date = document.getElementById('date').value;
         const time = document.getElementById('time').value;
@@ -15,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Validate required fields
         if (!supermarket || !date || !time) {
-            event.preventDefault();
             errorMessage.textContent = 'אנא מלא את כל השדות';
             errorMessage.style.opacity = '1';
             setTimeout(() => {
@@ -28,12 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        // Check that the selected date is tomorrow or later
         const tomorrow = new Date(today);
         tomorrow.setDate(today.getDate() + 1);
 
         if (selectedDate < tomorrow) {
-            event.preventDefault();
             errorMessage.textContent = 'אנא בחר תאריך עתידי בלבד (ממחר והלאה)';
             errorMessage.style.opacity = '1';
             setTimeout(() => {
@@ -43,28 +43,54 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Show loading animation
-        event.preventDefault();
         loadingContainer.style.display = 'flex';
+        loadingMessage.textContent = 'שולח את פרטי המשלוח...';
 
-        // Display loading messages in sequence
-        const messages = [
-            'נתונים התקבלו',
-            'שולח התראות למשתמשים בסביבתך',
-            'פרטי המשלוח נשלחו, משתמשים שרוצים להצטרף להזמנה יצרו איתך קשר',
-        ];
-        let messageIndex = 0;
+        // Prepare the data to send to the backend
+        const deliveryData = {
+            supermarket,
+            date,
+            time,
+        };
 
-        loadingMessage.textContent = messages[messageIndex];
+        try {
+            // Send the data to the server using fetch
+            const response = await fetch('/delivery/create-delivery', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(deliveryData),
+            });
+            
 
-        const changeMessage = setInterval(() => {
-            messageIndex++;
-            if (messageIndex < messages.length) {
-                loadingMessage.textContent = messages[messageIndex];
-            } else {
-                clearInterval(changeMessage);
-                loadingContainer.style.display = 'none';
-                deliveryForm.reset();
+            if (!response.ok) {
+                throw new Error('Failed to upload delivery data');
             }
-        }, 2000);
+
+            const result = await response.json();
+
+            // Display success message
+            successMessage.textContent = result.message;
+            successMessage.style.opacity = '1';
+
+            // Hide loading animation
+            loadingContainer.style.display = 'none';
+
+            // Reset the form
+            deliveryForm.reset();
+
+            // Hide success message after 4 seconds
+            setTimeout(() => {
+                successMessage.style.opacity = '0';
+            }, 4000);
+        } catch (error) {
+            // Display error message
+            errorMessage.textContent = 'אירעה שגיאה בשליחת הנתונים, אנא נסה שוב';
+            errorMessage.style.opacity = '1';
+
+            // Hide loading animation
+            loadingContainer.style.display = 'none';
+        }
     });
 });
