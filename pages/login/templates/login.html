@@ -2,28 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>התחברות</title>
-    <link rel="stylesheet" href="../../../templates/base.css" />
-    <link rel="stylesheet" href="../static/css/login.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('login.static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
   </head>
   <body>
-    <header class="main-header">
-      <div class="header-item left">
-        <a href="signup.html" class="header-link">הרשמה</a>
-        <a href="login.html" class="header-link">התחברות</a>
-      </div>
-      <div class="header-item center">
-        <a href="create-delivery.html" class="header-link">צור משלוח</a>
-      </div>
-      <div class="header-item right">
-        <a href="index.html" class="header-link">חבומרקט</a>
-      </div>
-    </header>
-
+    {% include 'components/header.html' %}
     <div class="form-container">
       <h1>התחברות</h1>
-
       <form>
         <div class="form-row">
           <div class="form-group full-width">
@@ -31,18 +19,16 @@
             <input type="email" id="email" />
           </div>
         </div>
-
         <div class="form-row">
           <div class="form-group full-width">
             <label for="password">סיסמה</label>
             <input type="password" id="password" />
           </div>
         </div>
-
         <button type="submit" class="action-btn">התחברות</button>
       </form>
     </div>
-
-    <script src="../static/js/login.js"></script>
+    <script src="{{ url_for('static', filename='components/header/static/js/header.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
   </body>
 </html>

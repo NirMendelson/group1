@@ -6,25 +6,12 @@
     <title>צור משלוח</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <link rel="stylesheet" href="{{ url_for('delivery.static', filename='css/create-delivery.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
   </head>
   <body>
-    <header class="main-header">
-      <div class="header-item left">
-        <a href="signup.html" class="header-link">הרשמה</a>
-        <a href="login.html" class="header-link">התחברות</a>
-      </div>
-      <div class="header-item center">
-        <a href="create-delivery.html" class="header-link">צור משלוח</a>
-      </div>
-      <div class="header-item right">
-        <a href="index.html" class="header-link">חבומרקט</a>
-      </div>
-    </header>
-    
-
+    {% include 'components/header.html' %}
     <div class="form-container">
       <h1>צור משלוח</h1>
-
       <form id="delivery-form" onsubmit="return false;">
         <div class="form-row">
           <div class="form-group full-width">
@@ -38,7 +25,6 @@
             </select>
           </div>
         </div>
-
         <div class="form-row">
           <div class="form-group">
             <label for="date">תאריך</label>
@@ -49,19 +35,16 @@
             <input type="time" id="time" />
           </div>
         </div>
-
         <button type="submit" class="action-btn">צור משלוח</button>
-
         <div id="error-message" class="error-message"></div>
         <div id="success-message" class="success-message"></div>
       </form>
     </div>
-
     <div id="loading-container" class="loading-container" style="display: none;">
       <div class="loading-circle"></div>
       <div id="loading-message" class="loading-message">נתונים התקבלו</div>
     </div>
-
+    <script src="{{ url_for('static', filename='components/header/static/js/header.js') }}"></script>
     <script src="{{ url_for('delivery.static', filename='js/create-delivery.js') }}"></script>
   </body>
 </html>

@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMessage = document.getElementById('error-message');
     const successMessage = document.getElementById('success-message');
 
-    signupForm.addEventListener('submit', (event) => {
+    signupForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
         // Reset validation messages and feedback
         [emailInput, passwordInput, cityInput, streetInput, numberInput, nameInput].forEach(input => input.setCustomValidity(''));
         errorMessage.textContent = '';
@@ -89,19 +91,56 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (!valid) {
-            event.preventDefault();
             errorMessage.textContent = 'אנא מלא את כל הפרטים';
             errorMessage.style.opacity = '1';
             setTimeout(() => {
                 errorMessage.style.opacity = '0';
             }, 4000);
-        } else {
-            event.preventDefault();
-            successMessage.textContent = 'נרשמת בהצלחה';
-            successMessage.classList.add('show');
+            return;
+        }
+
+        // Collect form data
+        const formData = {
+            phone: phoneInput.value.trim(),
+            email: emailInput.value.trim(),
+            name: nameInput.value.trim(),
+            password: passwordInput.value.trim(),
+            number: numberInput.value.trim(),
+            street: streetInput.value.trim(),
+            city: cityInput.value.trim(),
+            supermarket: supermarketSelect.value.trim()
+        };
+
+        try {
+            // Send data to the backend
+            const response = await fetch('/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                successMessage.textContent = result.success;
+                successMessage.classList.add('show');
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 2000);
+            } else {
+                errorMessage.textContent = result.error || 'An error occurred. Please try again.';
+                errorMessage.style.opacity = '1';
+                setTimeout(() => {
+                    errorMessage.style.opacity = '0';
+                }, 4000);
+            }
+        } catch (error) {
+            errorMessage.textContent = 'Failed to sign up. Please try again.';
+            errorMessage.style.opacity = '1';
             setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 2000);
+                errorMessage.style.opacity = '0';
+            }, 4000);
         }
     });
 

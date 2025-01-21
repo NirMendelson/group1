@@ -37,7 +37,15 @@
     display: flex;
     justify-content: center;
     gap: 4rem;
+    text-align: center;       /* Center the text */
   }
+
+  .button-container a {
+    text-decoration: none;
+  }
+
+
+  
   
   /* Responsive Adjustments */
   @media (min-width: 1600px) {
@@ -68,5 +76,7 @@
       margin: 0 0 0 auto;
       width: 80%;
     }
+
+    
   }
   

@@ -4,26 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>הרשמה</title>
-    <link rel="stylesheet" href="../../../templates/base.css" />
-    <link rel="stylesheet" href="../static/css/signup.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('signup.static', filename='css/signup.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
   </head>
   <body>
-    <header class="main-header">
-      <div class="header-item left">
-        <a href="signup.html" class="header-link">הרשמה</a>
-        <a href="login.html" class="header-link">התחברות</a>
-      </div>
-      <div class="header-item center">
-        <a href="create-delivery.html" class="header-link">צור משלוח</a>
-      </div>
-      <div class="header-item right">
-        <a href="index.html" class="header-link">חבומרקט</a>
-      </div>
-    </header>
-
+    {% include 'components/header.html' %}
     <div class="form-container">
       <h1>הרשמה</h1>
-
       <form id="signup-form">
         <div class="form-row">
           <div class="form-group">
@@ -35,7 +23,6 @@
             <input type="email" id="email" />
           </div>
         </div>
-
         <div class="form-row">
           <div class="form-group">
             <label for="phone">מספר טלפון</label>
@@ -46,7 +33,6 @@
             <input type="text" id="name" />
           </div>
         </div>
-
         <div class="form-row">
           <div class="form-group">
             <label for="number">מספר</label>
@@ -61,7 +47,6 @@
             <input type="text" id="city" />
           </div>
         </div>
-
         <div class="form-row">
           <div class="form-group full-width">
             <label for="supermarket">סופר מועדף</label>
@@ -74,14 +59,12 @@
             </select>
           </div>
         </div>
-
         <button type="submit" class="action-btn">הרשמה</button>
-
         <div id="error-message" class="error-message"></div>
         <div id="success-message" class="success-message"></div>
       </form>
     </div>
-
-    <script src="../static/js/signup.js"></script>
+    <script src="{{ url_for('static', filename='components/header/static/js/header.js') }}"></script>
+    <script src="{{ url_for('signup.static', filename='js/signup.js') }}"></script>
   </body>
 </html>

@@ -4,11 +4,11 @@ from utilities.db_connector import get_db
 # Define the Blueprint for the delivery module
 delivery_bp = Blueprint('delivery', __name__, template_folder='templates', static_folder='static')
 
-@delivery_bp.route('/create-delivery', methods=['GET'])
+@delivery_bp.route('/', methods=['GET'])
 def create_delivery_page():
     return render_template('create-delivery.html')
 
-@delivery_bp.route('/create-delivery', methods=['POST'])
+@delivery_bp.route('/', methods=['POST'])
 def create_delivery():
     try:
         # Connect to the database

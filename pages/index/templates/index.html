@@ -4,25 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>חבומרקט - דף הבית</title>
-    <link rel="stylesheet" href="../../../templates/base.css" />
-    <link rel="stylesheet" href="../static/css/index.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('index.static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
   </head>
   <body>
-    <header class="main-header">
-      <div class="header-item left">
-        <a href="signup.html" class="header-link">הרשמה</a>
-        <a href="login.html" class="header-link">התחברות</a>
-      </div>
-      <div class="header-item center">
-        <a href="create-delivery.html" class="header-link">צור משלוח</a>
-      </div>
-      <div class="header-item right">
-        <a href="index.html" class="header-link">חבומרקט</a>
-      </div>
-    </header>
-
+    {% include 'components/header.html' %}
     <div>
-      <img class="bg-img" src="../../../static/media/img/3000X3000.jpg" alt="Background Image" />
+      <img class="bg-img" src="{{ url_for('static', filename='media/img/3000X3000.jpg') }}" alt="Background Image">
     </div>
 
     <div class="text-container">
@@ -32,9 +21,10 @@
       <h2>3. מבצעים הזמנה משותפת</h2>
 
       <div class="button-container">
-        <button class="action-btn" onclick="window.location.href='signup.html'">הרשמה</button>
-        <button class="action-btn" onclick="window.location.href='login.html'">התחברות</button>
+        <a href="{{ url_for('signup.create_signup_page') }}" class="action-btn">הרשמה</a>
+        <a href="{{ url_for('login.create_login_page') }}" class="action-btn">התחברות</a>
       </div>
     </div>
+    <script src="{{ url_for('static', filename='components/header/static/js/header.js') }}"></script>
   </body>
 </html>

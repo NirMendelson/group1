@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // Send the data to the server using fetch
-            const response = await fetch('/delivery/create-delivery', {
+            const response = await fetch('/delivery/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
