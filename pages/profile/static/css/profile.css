@@ -1,20 +1,60 @@
-
+/* Ensure the buttons align horizontally and are centered */
+.delete-and-action-btns {
+    display: flex;
+    justify-content: center; /* Center the buttons */
+    align-items: center; /* Ensure vertical alignment */
+    gap: 45px;
+  }
   
-.delete-btn {
-    background-color: #b10000;
-    color: white;
+  /* Standardize the button styles */
+  .action-btn,
+  .delete-btn {
+    flex: 0 0 200px; /* Set a fixed width and prevent flex resizing */
+    text-align: center;
+    padding: 10px;
+    border-radius: 500px;
     font-family: "Assistant", sans-serif;
     font-size: 1rem;
     border: none;
-    border-radius: 500px;
-    padding: 10px;
     cursor: pointer;
-    min-width: 120px;
-    display: block;
-    margin: 0 auto;
-    margin-top: 10px;
+    margin: 0;
+  }
+  
+  /* Specific styles for the action button */
+  .action-btn {
+    background-color: #416655;
+    color: white;
+  }
+  
+  .action-btn:hover {
+    background-color: #2f4a3e;
+  }
+  
+  /* Specific styles for the delete button */
+  .delete-btn {
+    background-color: #b10000;
+    color: white;
+  }
+  
+  .delete-btn:hover {
+    background-color: #d32f2f;
+  }
+  
+  /* Success and error messages */
+.success-message,
+.error-message {
+    font-family: "Assistant", sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 20px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
-.delete-btn:hover {
-  background-color: #d32f2f;
+.success-message {
+    color: green;
+}
+
+.error-message {
+    color: red;
 }

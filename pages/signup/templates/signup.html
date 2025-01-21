@@ -52,13 +52,12 @@
             <label for="supermarket">סופר מועדף</label>
             <select id="supermarket">
               <option value="">בחר סופר</option>
-              <option value="רמי לוי">רמי לוי</option>
-              <option value="שופרסל">שופרסל</option>
-              <option value="ויקטורי">ויקטורי</option>
-              <option value="מחסני השוק">מחסני השוק</option>
+              {% for supermarket in supermarkets %}
+                <option value="{{ supermarket }}">{{ supermarket }}</option>
+              {% endfor %}
             </select>
           </div>
-        </div>
+        </div>        
         <button type="submit" class="action-btn">הרשמה</button>
         <div id="error-message" class="error-message"></div>
         <div id="success-message" class="success-message"></div>

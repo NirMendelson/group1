@@ -10,12 +10,22 @@ def create_profile_page():
 
     db = profile_bp.db
     customers_collection = db['customers']
-    customer = customers_collection.find_one({"email": session['email']})
+    supermarkets_collection = db['supermarkets']
 
+    # Fetch the logged-in customer's data
+    customer = customers_collection.find_one({"email": session['email']})
     if not customer:
         return redirect(url_for('login.create_login_page'))
 
-    return render_template('profile.html', customer=customer)
+    # Fetch all supermarkets and extract their names
+    supermarkets = supermarkets_collection.find({}, {"name": 1, "_id": 0})
+    supermarket_names = [supermarket["name"] for supermarket in supermarkets]
+
+    # Pass `is_logged_in` to the template
+    is_logged_in = 'email' in session
+    return render_template('profile.html', customer=customer, supermarkets=supermarket_names, is_logged_in=is_logged_in)
+
+
 
 @profile_bp.route('/update', methods=['POST'])
 def update_profile():

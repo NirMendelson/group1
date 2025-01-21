@@ -5,8 +5,16 @@ signup_bp = Blueprint('signup', __name__, template_folder='templates', static_fo
 
 @signup_bp.route('/', methods=['GET'])
 def create_signup_page():
-    """Render the sign-up page."""
-    return render_template('signup.html')
+    """Render the sign-up page with supermarket options."""
+    db = signup_bp.db  # Access the database
+    supermarkets_collection = db['supermarkets']  # Access the 'supermarkets' collection
+
+    # Fetch all supermarkets and extract their names
+    supermarkets = supermarkets_collection.find({}, {"name": 1, "_id": 0})
+    supermarket_names = [supermarket["name"] for supermarket in supermarkets]
+
+    return render_template('signup.html', supermarkets=supermarket_names)
+
 
 @signup_bp.route('/', methods=['POST'])
 def handle_signup():

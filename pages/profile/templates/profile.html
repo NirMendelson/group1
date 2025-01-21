@@ -52,24 +52,26 @@
           </div>
         </div>
         <div class="form-row">
-          <div class="form-group full-width">
-            <label for="supermarket">סופר מועדף</label>
-            <select id="supermarket">
-              <option value="">בחר סופר</option>
-              <option value="רמי לוי" {% if customer['supermarket'] == "רמי לוי" %}selected{% endif %}>רמי לוי</option>
-              <option value="שופרסל" {% if customer['supermarket'] == "שופרסל" %}selected{% endif %}>שופרסל</option>
-              <option value="ויקטורי" {% if customer['supermarket'] == "ויקטורי" %}selected{% endif %}>ויקטורי</option>
-              <option value="מחסני השוק" {% if customer['supermarket'] == "מחסני השוק" %}selected{% endif %}>מחסני השוק</option>
-            </select>
-          </div>
-        </div>
-        <button type="submit" class="action-btn">עדכן</button>
-        <button type="button" class="delete-btn">מחק משתמש</button>
+            <div class="form-group full-width">
+              <label for="supermarket">סופר מועדף</label>
+              <select id="supermarket">
+                <option value="">בחר סופר</option>
+                {% for supermarket in supermarkets %}
+                  <option value="{{ supermarket }}" {% if customer['supermarket'] == supermarket %}selected{% endif %}>
+                    {{ supermarket }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>          
+          <div class="delete-and-action-btns">
+            <button type="button" class="delete-btn">מחק משתמש</button>
+            <button type="submit" class="action-btn">עדכן</button>
+          </div>          
         <div id="error-message" class="error-message"></div>
         <div id="success-message" class="success-message"></div>
       </form>
     </div>
-    <script src="{{ url_for('static', filename='components/header/static/js/header.js') }}"></script>
     <script src="{{ url_for('profile.static', filename='js/profile.js') }}"></script>
   </body>
 </html>
