@@ -1,13 +1,22 @@
 <header class="main-header">
-    <div class="header-item left">
+  <div class="header-item left">
+    {% if is_logged_in %}
+      <div class="dropdown">
+        <a href="#" class="header-link dropdown-toggle">פרופיל</a>
+        <div class="dropdown-menu">
+          <a href="{{ url_for('profile.create_profile_page') }}" class="dropdown-item">פרופיל</a>
+          <a href="{{ url_for('login.logout') }}" class="dropdown-item">התנתק</a>
+        </div>
+      </div>
+    {% else %}
       <a href="{{ url_for('signup.create_signup_page') }}" class="header-link">הרשמה</a>
       <a href="{{ url_for('login.create_login_page') }}" class="header-link">התחברות</a>
-    </div>
-    <div class="header-item center">
-      <a href="{{ url_for('delivery.create_delivery_page') }}" class="header-link">צור משלוח</a>
-    </div>
-    <div class="header-item right">
-      <a href="{{ url_for('index.create_index_page') }}" class="header-link">חבומרקט</a>
-    </div>
-  </header>
-  
+    {% endif %}
+  </div>
+  <div class="header-item center">
+    <a href="{{ url_for('delivery.create_delivery_page') }}" class="header-link">צור משלוח</a>
+  </div>
+  <div class="header-item right">
+    <a href="{{ url_for('index.create_index_page') }}" class="header-link">חבומרקט</a>
+  </div>
+</header>

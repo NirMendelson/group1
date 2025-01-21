@@ -20,10 +20,12 @@
       <h2>2. מחכים לוואצאפ על מציאת התאמה עבורכם</h2>
       <h2>3. מבצעים הזמנה משותפת</h2>
 
+      {% if not is_logged_in %}
       <div class="button-container">
         <a href="{{ url_for('signup.create_signup_page') }}" class="action-btn">הרשמה</a>
         <a href="{{ url_for('login.create_login_page') }}" class="action-btn">התחברות</a>
       </div>
+      {% endif %}
     </div>
   </body>
 </html>

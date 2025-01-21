@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            // Send the data to the server using fetch
+            // Send the data to the server
             const response = await fetch('/delivery/', {
                 method: 'POST',
                 headers: {
@@ -62,8 +62,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: JSON.stringify(deliveryData),
             });
-            
 
+            if (response.status === 401) {
+                // User is not logged in
+                const result = await response.json();
+                errorMessage.textContent = result.error || 'הירשם או התחבר כדי לבצע הזמנה';
+                errorMessage.style.opacity = '1';
+
+                // Hide loading
+                loadingContainer.style.display = 'none';
+                return;
+            }
+
+            // Any other non-OK status
             if (!response.ok) {
                 throw new Error('Failed to upload delivery data');
             }

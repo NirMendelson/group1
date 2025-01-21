@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, session, redirect
 from werkzeug.security import check_password_hash
 
 login_bp = Blueprint('login', __name__, template_folder='templates', static_folder='static')
@@ -11,7 +11,6 @@ def create_login_page():
 @login_bp.route('/', methods=['POST'])
 def login():
     """Handle user login."""
-    # Retrieve the database object from the blueprint
     db = login_bp.db
     customers_collection = db["customers"]
 
@@ -31,5 +30,16 @@ def login():
     if not check_password_hash(customer["password"], password):
         return jsonify({"success": False, "message": "Incorrect password."}), 401
 
+    # If all is good, store the user email in session
+    session['email'] = email
+
     # Successful login
-    return jsonify({"success": True, "message": "Login successful."}), 200
+    return jsonify({"success": True, "message": "Login successful.", "redirect": "/"}), 200
+
+@login_bp.route('/logout', methods=['GET'])
+def logout():
+    """Log out the user."""
+    # Remove the user email from the session
+    session.pop('email', None)
+    # Redirect to the home page or login page
+    return redirect('/')
