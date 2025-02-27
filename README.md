@@ -19,14 +19,14 @@ Enables users to navigate through different pages on the website without having 
 - Phone Number: Must start with `05` and only include digits.
 - Multiple Deliveries: A user can create another delivery only after their previous delivery date has passed or if they cancel their delivery through their profile.
 
-#### 4. Profile Page:
+#### 4. Profile Page
 Once logged in, a user can access their profile page where he can:
 - View all past and upcoming deliveries made through the website.
 - Cancel upcoming delivery.
 - Update their details.
 - Delete theis profile.
 
-##### 5. Website flow-
+##### 5. Website flow
 Home Page -> Sign in/Login -> Delivery -> Profile ->  Logout
 -If a user tries to create a delivery before signing in or logging in, they will receive a message prompting them to log in first.
 -Once logged in, the user will be able to access their profile page or log out.
