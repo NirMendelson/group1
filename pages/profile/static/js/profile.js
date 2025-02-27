@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const deleteButton = document.querySelector(".delete-btn");
     const successMessage = document.getElementById("success-message");
     const errorMessage = document.getElementById("error-message");
+    const deleteOrderButton = document.querySelector(".delete-order-btn");
 
     const phoneInput = document.getElementById("phone");
     const nameInput = document.getElementById("name");
@@ -12,13 +13,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const cityInput = document.getElementById("city");
     const supermarketSelect = document.getElementById("supermarket");
 
-    // Utility to show a message
+    // Debugging: Ensure all required elements exist
+    if (!form) {
+        console.error("Error: Profile form not found.");
+        return;
+    }
+    if (!deleteButton) {
+        console.warn("Warning: Delete button not found.");
+    }
+    if (!supermarketSelect) {
+        console.error("Error: Supermarket dropdown not found.");
+        return;
+    }
+
+    // Utility function to show messages
     function showMessage(element, message) {
+        if (!element) return;
         element.textContent = message;
         element.style.opacity = "1";
         setTimeout(() => {
             element.style.opacity = "0";
-        }, 5000); // Hide after 5 seconds
+        }, 5000);
     }
 
     // Handle profile update
@@ -34,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let valid = true;
 
-        // Check if all fields are filled (except password, which is optional)
+        // Validate required fields (except password)
         const inputs = [phoneInput, nameInput, numberInput, streetInput, cityInput, supermarketSelect];
         for (const input of inputs) {
             if (!input.value.trim()) {
@@ -46,14 +61,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Validate phone number
-        if (valid && !/^[0]\d+$/.test(phoneInput.value.trim())) {
-            phoneInput.setCustomValidity("Phone number must start with 0 and contain only digits.");
+        if (valid && !/^[0]\d{9}$/.test(phoneInput.value.trim())) {
+            phoneInput.setCustomValidity("Phone number must start with 0 and contain exactly 10 digits.");
             phoneInput.reportValidity();
             valid = false;
         }
 
         // Validate supermarket selection
-        if (valid && !supermarketSelect.value.trim()) {
+        if (valid && supermarketSelect && !supermarketSelect.value.trim()) {
             supermarketSelect.setCustomValidity("Please select a preferred supermarket.");
             supermarketSelect.reportValidity();
             valid = false;
@@ -94,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Prepare data for submission
         const data = {
-            password: passwordInput.value.trim(), // Optional
+            password: passwordInput ? passwordInput.value.trim() : "", // Optional
             phone: phoneInput.value.trim(),
             name: nameInput.value.trim(),
             number: numberInput.value.trim(),
@@ -123,27 +138,59 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Handle profile deletion
-    deleteButton.addEventListener("click", async () => {
-        try {
-            const response = await fetch("/profile/delete", { method: "POST" });
-            const result = await response.json();
+    if (deleteButton) {
+        deleteButton.addEventListener("click", async () => {
+            try {
+                const response = await fetch("/profile/delete", { method: "POST" });
+                const result = await response.json();
 
-            if (response.ok) {
-                showMessage(successMessage, "המשתמש נמחק בהצלחה");
-                setTimeout(() => {
-                    window.location.href = "/";
-                }, 2000); // Redirect after 2 seconds
-            } else {
-                showMessage(errorMessage, result.error || "שגיאה במחיקת המשתמש");
+                if (response.ok) {
+                    showMessage(successMessage, "המשתמש נמחק בהצלחה");
+                    setTimeout(() => {
+                        window.location.href = "/";
+                    }, 2000);
+                } else {
+                    showMessage(errorMessage, result.error || "שגיאה במחיקת המשתמש");
+                }
+            } catch (error) {
+                console.error("Error deleting profile:", error);
+                showMessage(errorMessage, "שגיאה במחיקת המשתמש. נסה שוב.");
             }
-        } catch (error) {
-            console.error("Error deleting profile:", error);
-            showMessage(errorMessage, "שגיאה במחיקת המשתמש. נסה שוב.");
-        }
-    });
+        });
+    }
+
+    // Handle deleting an active order
+    if (deleteOrderButton) {
+        deleteOrderButton.addEventListener("click", async () => {
+            const orderId = deleteOrderButton.getAttribute("data-order-id");
+            if (!orderId) {
+                console.error("Error: Order ID not found.");
+                return;
+            }
+
+            try {
+                const response = await fetch(`/profile/delete_order/${orderId}`, { method: "DELETE" });
+                const result = await response.json();
+
+                if (response.ok) {
+                    showMessage(successMessage, "הזמנה נמחקה בהצלחה");
+                    setTimeout(() => {
+                        location.reload(); // Refresh the page to reflect changes
+                    }, 1500);
+                } else {
+                    showMessage(errorMessage, result.error || "שגיאה במחיקת ההזמנה");
+                }
+            } catch (error) {
+                console.error("Error deleting order:", error);
+                showMessage(errorMessage, "שגיאה במחיקת ההזמנה. נסה שוב.");
+            }
+        });
+    }
 
     // Clear validation messages on input changes
     [phoneInput, nameInput, passwordInput, numberInput, streetInput, cityInput, supermarketSelect].forEach((input) => {
-        input.addEventListener("input", () => input.setCustomValidity(""));
+        if (input) {
+            input.addEventListener("input", () => input.setCustomValidity(""));
+        }
     });
 });
