@@ -1,4 +1,4 @@
-html, body {
+/* html, body {
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -39,6 +39,57 @@ html, body {
   flex: 1 1 100%;
 }
 
+.action-btn {
+  display: block;
+  margin: 0 auto;
+} */
+ 
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.form-container {
+  max-width: 37.5rem; /* 600px → 37.5rem */
+  margin: 3.125rem auto; /* 50px → 3.125rem */
+  padding: 1.25rem; /* 20px → 1.25rem */
+  border-radius: 0.625rem; /* 10px → 0.625rem */
+  text-align: right;
+}
+
+.form-container h1 {
+  font-family: "Assistant", sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 2.5rem; /* 40px → 2.5rem */
+  text-align: center;
+  margin-top: 0;
+}
+
+/* Adjust spacing but keep original layout */
+.form-row {
+  display: flex;
+  justify-content: center; /* Center the form rows */
+  gap: 0.625rem; /* 10px → 0.625rem */
+  margin-bottom: 0.9375rem; /* 15px → 0.9375rem */
+}
+
+/* Labels stay on the left */
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: right; /* Keeps labels aligned properly */
+}
+
+.form-group.full-width {
+  flex: 1 1 100%;
+}
+
+/* Button stays centered */
 .action-btn {
   display: block;
   margin: 0 auto;

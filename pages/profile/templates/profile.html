@@ -1,24 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>פרופיל</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-    <!-- Load signup.css first -->
-    <link rel="stylesheet" href="{{ url_for('signup.static', filename='css/signup.css') }}">
-    <!-- Then load profile-specific overrides -->
-    <link rel="stylesheet" href="{{ url_for('profile.static', filename='css/profile.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
-    
-  </head>
-  <body>
-    {% include 'components/header.html' %}
-    <div class="form-container">
-      <h1>פרופיל</h1>
-      <form id="profile-form">
-        <div class="form-row">
-          <div class="form-group">
+{%extends 'base.html'%}
+
+{%block title%}
+  <title>פרופיל</title>
+{% endblock%}
+
+{%block css%}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+  <!-- Load signup.css first -->
+  <link rel="stylesheet" href="{{ url_for('signup.static', filename='css/signup.css') }}">
+  <!-- Then load profile-specific overrides -->
+  <link rel="stylesheet" href="{{ url_for('profile.static', filename='css/profile.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+{% endblock%}
+
+{%block content%}
+  <div class="form-container">
+    <h1>פרופיל</h1>
+     <form id="profile-form">
+       <div class="form-row">
+        <div class="form-group">
             <label for="password">סיסמה חדשה</label>
             <input type="password" id="password" placeholder="השאר ריק אם לא מעוניין לשנות" />
           </div>
@@ -73,5 +73,4 @@
       </form>
     </div>
     <script src="{{ url_for('profile.static', filename='js/profile.js') }}"></script>
-  </body>
-</html>
+{%endblock%}

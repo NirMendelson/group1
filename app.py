@@ -26,6 +26,7 @@ app.register_blueprint(login_bp, url_prefix='/login')        # Routes under /log
 app.register_blueprint(index_bp, url_prefix='/')             # Routes under /
 app.register_blueprint(profile_bp, url_prefix='/profile')    # Routes under /profile
 
+
 # Pass the database to each blueprint
 signup_bp.db = db
 login_bp.db = db
