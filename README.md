@@ -9,8 +9,7 @@ In order to keep all information about users and deliveries made through our web
 - Customers: every time a user wants to login to his profile through the login form the website accesses the customers' collection and searches for the user's details.
 - Orders: all Orders are stored in the orders collection with all delivery and user's details.
 - Supermarkets: contains the supermarket list.
-- Notifications: Stores all user's notifications (a notification is sent to the user when a nearby user schedules a delivery).
-
+- Notifications: stores all user notifications (a notification is sent when a nearby user schedules a delivery).
 ### 2. Session
 Enables users to navigate through different pages on the website without having to log in each time.
 
