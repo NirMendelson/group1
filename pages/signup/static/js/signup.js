@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Validate phone number
-        if (valid && !/^[0]\d+$/.test(phoneInput.value.trim())) {
-            phoneInput.setCustomValidity('Phone number must start with 0 and contain only digits.');
+        if (valid && !/^05\d{8}$/.test(phoneInput.value.trim())) {
+            phoneInput.setCustomValidity('Phone number must start with 05 and be 10 digits long (only numbers).');
             phoneInput.reportValidity();
             valid = false;
         }

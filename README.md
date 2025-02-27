@@ -26,7 +26,7 @@ The registration form ensures all details are correct:
 The site is fully responsive, ensuring a seamless experience on desktops, tablets, and smartphones.
 
 ### 5. Loading Animation
-After creating a delivery offer, users see a loading animation featuring:
+After creating a delivery order, users see a loading animation featuring:
 - A spinning circle.
 - Three changing messages, displayed every 2 seconds:
   1. "נתונים התקבלו"
