@@ -41,15 +41,24 @@ def create_delivery_page():
             if not (today <= delivery_date <= max_date):
                 return jsonify({"error": "תאריך המשלוח חייב להיות בטווח של 30 הימים הקרובים."}), 400
 
-            # Disallow Saturday (weekday() => Monday=0, Sunday=6 => so Saturday=5 if using some frameworks,
-            # but in Python Monday=0, Tuesday=1, ... Sunday=6, so Saturday=5).
-            # Actually in Python Monday=0, Tuesday=1, ..., Saturday=5, Sunday=6.
+            # Disallow Saturday (in Python, Monday=0 ... Sunday=6, so Saturday=5)
             if delivery_date.weekday() == 5:
                 return jsonify({"error": "מועד המשלוח לא יכול להיות בשבת."}), 400
 
-            valid_times = [f"{h:02d}:{m:02d}" for h in range(8, 22) for m in [0, 15, 30, 45]]
+            # Build the valid times array dynamically:
+            # - If Friday => up to 13:00
+            # - Else => up to 21:00
+            if delivery_date.weekday() == 4:  # Friday
+                valid_times = [f"{h:02d}:{m:02d}"
+                               for h in range(8, 14)  # 8..13
+                               for m in [0, 15, 30, 45]]
+            else:
+                valid_times = [f"{h:02d}:{m:02d}"
+                               for h in range(8, 22)  # 8..21
+                               for m in [0, 15, 30, 45]]
+
             if data['time'] not in valid_times:
-                return jsonify({"error": "שעת המשלוח חייבת להיות בין 08:00 ל-21:00 עם דקות 00, 15, 30 או 45 בלבד."}), 400
+                return jsonify({"error": "שעת המשלוח אינה תקפה עבור תאריך זה."}), 400
 
             user_email = session['email']
 

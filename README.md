@@ -14,7 +14,8 @@ In order to keep all information about users and deliveries made through our web
 Enables users to navigate through different pages on the website without having to log in each time.
 
 ### 3. Added Validations
-- Delivery Date: can't be further than 30 days from today.
+- Delivery Date: Can only be chosen within the next 7 days (excluding today and Saturdays). If the selected date is a Friday, the latest delivery time allowed is 13:00.
+- Order Cancellation: Can only be made at least 24 hours before the scheduled delivery date and time.
 - Phone Number: Must start with `05` and only include digits.
 - Multiple Deliveries: A user can create another delivery only after their previous delivery date has passed or if they cancel their delivery through their profile.
 

@@ -7,20 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadingContainer = document.getElementById('loading-container');
     const loadingMessage = document.getElementById('loading-message');
 
-    // Populate the time dropdown with allowed times (08:00 - 21:00 with 15-minute intervals)
-    function populateTimeOptions() {
-        for (let hour = 8; hour <= 21; hour++) {
-            for (let minute of ["00", "15", "30", "45"]) {
-                const timeValue = `${hour.toString().padStart(2, '0')}:${minute}`;
-                const option = document.createElement('option');
-                option.value = timeValue;
-                option.textContent = timeValue;
-                timeSelect.appendChild(option);
-            }
-        }
-    }
-
-    // Populate the date dropdown with the next 7 days, skipping Saturdays and today
+    // --- Populate Date Options ---
     function populateDateOptions() {
         const today = new Date();
         let daysAdded = 0;
@@ -30,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const future = new Date(today);
             future.setDate(today.getDate() + offset);
 
-            // day: 0 = Sunday, 1 = Monday, ... 5 = Friday, 6 = Saturday
+            // day: 0=Sunday, 1=Monday, ... 5=Friday, 6=Saturday
             const dayOfWeek = future.getDay();
 
             // Skip Saturdays (dayOfWeek === 6)
@@ -42,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // For consistent server processing, use YYYY-MM-DD as the 'value'
                 option.value = `${year}-${month}-${day}`;
-                // Show dd.mm.yyyy in the dropdown text (or any format you prefer)
+                // Show dd.mm.yyyy in the dropdown text
                 option.textContent = `${day}.${month}.${year}`;
                 dateSelect.appendChild(option);
 
@@ -52,9 +39,53 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Initial population of time and date options
-    populateTimeOptions();
+    // --- Populate Time Options ---
+    // We'll handle Friday differently (up to 13:00) vs. other days (up to 21:00).
+    function populateTimeOptions(selectedDate) {
+        // Clear out existing options
+        timeSelect.innerHTML = '';
+        // Put a default option back
+        const placeholder = document.createElement('option');
+        placeholder.value = '';
+        placeholder.textContent = 'בחר שעה';
+        timeSelect.appendChild(placeholder);
+
+        if (!selectedDate) {
+            return; // If no date selected yet, don't fill times
+        }
+
+        const dateObj = new Date(selectedDate);
+        const weekday = dateObj.getDay(); // 0=Sunday, 1=Monday, ... 4=Thursday, 5=Friday, 6=Saturday
+
+        // If Friday => last hour is 13, else => last hour is 21
+        const lastHour = (weekday === 5) ? 13 : 21;
+
+        for (let hour = 8; hour <= lastHour; hour++) {
+            // If it's Friday and hour==13, only "13:00" is valid (not 13:15, 13:30, 13:45)
+            const minuteIntervals = (weekday === 5 && hour === 13)
+                ? [0]  // Only "13:00"
+                : [0, 15, 30, 45];
+
+            for (let minute of minuteIntervals) {
+                const hh = hour.toString().padStart(2, '0');
+                const mm = minute.toString().padStart(2, '0');
+                const timeValue = `${hh}:${mm}`;
+                const option = document.createElement('option');
+                option.value = timeValue;
+                option.textContent = timeValue;
+                timeSelect.appendChild(option);
+            }
+        }
+    }
+
+    // On page load
     populateDateOptions();
+
+    // Whenever the user changes the date, re-populate time options accordingly
+    dateSelect.addEventListener('change', () => {
+        const chosenDate = dateSelect.value; // "YYYY-MM-DD"
+        populateTimeOptions(chosenDate);
+    });
 
     // Form submission handler
     deliveryForm.addEventListener('submit', async (event) => {
