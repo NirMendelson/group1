@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, session, request, jsonify, redirect, url_for
-from datetime import datetime
+from datetime import datetime, timedelta
 from bson import ObjectId  # Import ObjectId to handle MongoDB IDs
 
 profile_bp = Blueprint('profile', __name__, template_folder='templates', static_folder='static')
@@ -24,17 +24,34 @@ def create_profile_page():
     supermarkets = supermarkets_collection.find({}, {"name": 1, "_id": 0})
     supermarket_names = [supermarket["name"] for supermarket in supermarkets]
 
-    today = datetime.today().strftime("%Y-%m-%d")
+    # We'll compare order dates to "now"
+    now = datetime.now()
+    today_str = now.strftime("%Y-%m-%d")  # string version for comparison in the DB
 
     # Fetch the user's active order (order with a future delivery date)
     active_order = orders_collection.find_one(
-        {"email": session['email'], "date": {"$gte": today}},
+        {"email": session['email'], "date": {"$gte": today_str}},
         sort=[("date", 1)]  # Sort by date ascending, to get the closest upcoming order
     )
 
+    can_cancel = False
+    if active_order:
+        # Parse the active order's date/time into a Python datetime for comparison
+        # active_order['date'] => "YYYY-MM-DD"
+        # active_order['time'] => "HH:MM"
+        try:
+            combined_dt_str = f"{active_order['date']} {active_order['time']}"  # e.g. "2025-03-01 15:30"
+            order_datetime = datetime.strptime(combined_dt_str, "%Y-%m-%d %H:%M")
+            # Check if there's more than 24 hours until this date/time
+            if order_datetime - now > timedelta(hours=24):
+                can_cancel = True
+        except Exception as e:
+            print(f"Error parsing active order date/time: {e}")
+            can_cancel = False
+
     # Fetch past orders (orders with a date before today)
     past_orders = orders_collection.find(
-        {"email": session['email'], "date": {"$lt": today}},
+        {"email": session['email'], "date": {"$lt": today_str}},
         sort=[("date", -1)]  # Sort by date descending, to show recent past orders first
     )
 
@@ -44,7 +61,8 @@ def create_profile_page():
         supermarkets=supermarket_names,
         is_logged_in=True,
         active_order=active_order,
-        past_orders=list(past_orders)  # Convert cursor to a list
+        past_orders=list(past_orders),  # Convert cursor to a list
+        can_cancel=can_cancel
     )
 
 

@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const deliveryForm = document.getElementById('delivery-form');
+    const dateSelect = document.getElementById('date');
     const timeSelect = document.getElementById('time');
     const errorMessage = document.getElementById('error-message');
     const successMessage = document.getElementById('success-message');
@@ -19,13 +20,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    populateTimeOptions(); // Call function to generate time options
+    // Populate the date dropdown with the next 7 days, skipping Saturdays and today
+    function populateDateOptions() {
+        const today = new Date();
+        let daysAdded = 0;
+        let offset = 1; // Start from tomorrow
 
+        while (daysAdded < 7) {
+            const future = new Date(today);
+            future.setDate(today.getDate() + offset);
+
+            // day: 0 = Sunday, 1 = Monday, ... 5 = Friday, 6 = Saturday
+            const dayOfWeek = future.getDay();
+
+            // Skip Saturdays (dayOfWeek === 6)
+            if (dayOfWeek !== 6) {
+                const option = document.createElement('option');
+                const day = future.getDate().toString().padStart(2, '0');
+                const month = (future.getMonth() + 1).toString().padStart(2, '0');
+                const year = future.getFullYear();
+
+                // For consistent server processing, use YYYY-MM-DD as the 'value'
+                option.value = `${year}-${month}-${day}`;
+                // Show dd.mm.yyyy in the dropdown text (or any format you prefer)
+                option.textContent = `${day}.${month}.${year}`;
+                dateSelect.appendChild(option);
+
+                daysAdded++;
+            }
+            offset++;
+        }
+    }
+
+    // Initial population of time and date options
+    populateTimeOptions();
+    populateDateOptions();
+
+    // Form submission handler
     deliveryForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         const supermarket = document.getElementById('supermarket').value;
-        const date = document.getElementById('date').value;
+        const date = dateSelect.value;
         const time = timeSelect.value;
 
         errorMessage.textContent = '';
@@ -40,14 +76,15 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Validate date range (1 <= date <= 30 days from now)
         const selectedDate = new Date(date);
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
+        const todayDate = new Date();
+        todayDate.setHours(0, 0, 0, 0);
 
         const maxDate = new Date();
-        maxDate.setDate(today.getDate() + 30);
+        maxDate.setDate(todayDate.getDate() + 30);
 
-        if (selectedDate < today || selectedDate > maxDate) {
+        if (selectedDate < todayDate || selectedDate > maxDate) {
             errorMessage.textContent = 'תאריך המשלוח חייב להיות בטווח של 30 הימים הקרובים.';
             errorMessage.style.opacity = '1';
             setTimeout(() => {

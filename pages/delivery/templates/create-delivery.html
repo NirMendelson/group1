@@ -1,51 +1,58 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 
-{%block title%}
-  <title>צור משלוח</title>
-{% endblock%}
+{% block title %}
+<title>צור משלוח</title>
+{% endblock %}
 
-  {%block css%}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-    <link rel="stylesheet" href="{{ url_for('delivery.static', filename='css/create-delivery.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
-  {% endblock%}
-    
-  {%block content%}
-    <div class="form-container">
-      <h1>צור משלוח</h1>
-      <form id="delivery-form" onsubmit="return false;">
-        <div class="form-row">
-          <div class="form-group full-width">
-            <label for="supermarket">סופר</label>
-            <select id="supermarket">
-              <option value="">בחר סופר</option>
-              <option value="רמי לוי">רמי לוי</option>
-              <option value="שופרסל">שופרסל</option>
-              <option value="ויקטורי">ויקטורי</option>
-              <option value="מחסני השוק">מחסני השוק</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="date">תאריך</label>
-            <input type="date" id="date" />
-          </div>
-          <div class="form-group">
-            <label for="time">שעה</label>
-            <select id="time">
-                <option value="">בחר שעה</option>
-            </select>
-        </div>              
-        </div>
-        <button type="submit" class="action-btn">צור משלוח</button>
-        <div id="error-message" class="error-message"></div>
-        <div id="success-message" class="success-message"></div>
-      </form>
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+<link rel="stylesheet" href="{{ url_for('delivery.static', filename='css/create-delivery.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+  <h1>צור משלוח</h1>
+  <form id="delivery-form" onsubmit="return false;">
+    <div class="form-row">
+      <div class="form-group full-width">
+        <label for="supermarket">סופר</label>
+        <select id="supermarket">
+          <option value="">בחר סופר</option>
+          <option value="רמי לוי">רמי לוי</option>
+          <option value="שופרסל">שופרסל</option>
+          <option value="ויקטורי">ויקטורי</option>
+          <option value="מחסני השוק">מחסני השוק</option>
+        </select>
+      </div>
     </div>
-    <div id="loading-container" class="loading-container" style="display: none;">
-      <div class="loading-circle"></div>
-      <div id="loading-message" class="loading-message">נתונים התקבלו</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="date">תאריך</label>
+        <!-- Changed from <input type="date" /> to <select> -->
+        <select id="date">
+          <option value="">בחר תאריך</option>
+          <!-- Options populated by JS -->
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="time">שעה</label>
+        <select id="time">
+            <option value="">בחר שעה</option>
+        </select>
+      </div>
     </div>
-    <script src="{{ url_for('delivery.static', filename='js/create-delivery.js') }}"></script>
-{%endblock%}
+    <button type="submit" class="action-btn">צור משלוח</button>
+    <div id="error-message" class="error-message"></div>
+    <div id="success-message" class="success-message"></div>
+  </form>
+</div>
+
+<div id="loading-container" class="loading-container" style="display: none;">
+  <div class="loading-circle"></div>
+  <div id="loading-message" class="loading-message">נתונים התקבלו</div>
+</div>
+
+<!-- Updated JS file reference -->
+<script src="{{ url_for('delivery.static', filename='js/create-delivery.js') }}"></script>
+{% endblock %}

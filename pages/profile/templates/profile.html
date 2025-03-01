@@ -72,10 +72,27 @@
     <div class="form-container">
         <h2>הזמנה פעילה</h2>
         {% if active_order %}
-        <p>תאריך: {{ active_order['date'] }}</p>
+        <p>
+            תאריך:
+            {{
+                active_order['date'].split('-')[2] ~ '.' ~
+                active_order['date'].split('-')[1] ~ '.' ~
+                active_order['date'].split('-')[0]
+            }}
+        </p>
         <p>שעה: {{ active_order['time'] }}</p>
         <p>סופר: {{ active_order['supermarket'] }}</p>
-        <button class="delete-order-btn" data-order-id="{{ active_order['_id'] }}">מחק הזמנה</button>
+
+        {% if can_cancel %}
+        <!-- Show cancel button if more than 24h remain -->
+        <button class="delete-order-btn" data-order-id="{{ active_order['_id'] }}">
+            בטל הזמנה
+        </button>
+        {% else %}
+        <!-- Otherwise show the message -->
+        <p>ניתן לבטל הזמנה עד 24 שעות לפני</p>
+        {% endif %}
+
         {% else %}
         <p>לא קיימת הזמנה פעילה</p>
         {% endif %}
@@ -85,13 +102,20 @@
     <div class="form-container">
         <h2>הזמנות עבר</h2>
         {% if past_orders and past_orders|length > 0 %}
-        {% for order in past_orders %}
-        <div class="past-order">
-            <p>תאריך: {{ order['date'] }}</p>
-            <p>שעה: {{ order['time'] }}</p>
-            <p>סופר: {{ order['supermarket'] }}</p>
-        </div>
-        {% endfor %}
+            {% for order in past_orders %}
+            <div class="past-order">
+                <p>
+                    תאריך:
+                    {{
+                        order['date'].split('-')[2] ~ '.' ~
+                        order['date'].split('-')[1] ~ '.' ~
+                        order['date'].split('-')[0]
+                    }}
+                </p>
+                <p>שעה: {{ order['time'] }}</p>
+                <p>סופר: {{ order['supermarket'] }}</p>
+            </div>
+            {% endfor %}
         {% else %}
         <p>לא קיימות הזמנות עבר</p>
         {% endif %}
