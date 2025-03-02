@@ -1,0 +1,97 @@
+/* Ensure full-screen scrolling, starting below the header */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent double scrollbars */
+}
+
+
+.scrollable-container {
+  position: absolute;
+  top: 60px; /* Adjust this value if your header height is different */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 60px); /* Full screen height minus header */
+  overflow-y: auto; /* Enables scrolling inside the container */
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 10001; /* Ensures the container is below the header */
+}
+
+/* Ensure buttons align properly */
+.delete-and-action-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Style for the delete order button */
+.delete-order-btn {
+  background-color: #b10000;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.delete-order-btn:hover {
+  background-color: #d32f2f;
+}
+
+/* Standardize the button styles */
+.action-btn,
+.delete-btn {
+  flex: 0 0 200px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 500px;
+  font-family: "Assistant", sans-serif;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+}
+
+/* Specific styles for the action button */
+.action-btn {
+  background-color: #416655;
+  color: white;
+}
+
+.action-btn:hover {
+  background-color: #2f4a3e;
+}
+
+/* Specific styles for the delete button */
+.delete-btn {
+  background-color: #b10000;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #d32f2f;
+}
+
+/* Success and error messages */
+.success-message,
+.error-message {
+  font-family: "Assistant", sans-serif;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 20px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.success-message {
+  color: green;
+}
+
+.error-message {
+  color: red;
+}

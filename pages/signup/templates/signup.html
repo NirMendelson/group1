@@ -1,0 +1,68 @@
+{%extends 'base.html'%}
+
+{%block title%}
+  <title>הרשמה</title>
+{% endblock%}
+  
+{%block css%}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('signup.static', filename='css/signup.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+{% endblock%}
+
+{%block content%}
+  <div class="form-container">
+   <h1>הרשמה</h1>
+    <form id="signup-form">
+      <div class="form-row">
+        <div class="form-group">
+           <label for="password">סיסמה</label>
+           <input type="password" id="password" />
+         </div>
+         <div class="form-group">
+            <label for="email">אימייל</label>
+            <input type="email" id="email" />
+        </div>
+        </div>
+      <div class="form-row">
+        <div class="form-group">
+           <label for="phone">מספר טלפון</label>
+           <input type="tel" id="phone" />
+        </div>
+        <div class="form-group">
+            <label for="name">שם</label>
+            <input type="text" id="name" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="number">מספר</label>
+          <input type="text" id="number" />
+        </div>
+        <div class="form-group">
+          <label for="street">רחוב</label>
+          <input type="text" id="street" />
+        </div>
+        <div class="form-group">
+          <label for="city">עיר</label>
+          <input type="text" id="city" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full-width">
+          <label for="supermarket">סופר מועדף</label>
+          <select id="supermarket">
+            <option value="">בחר סופר</option>
+            {% for supermarket in supermarkets %}
+               <option value="{{ supermarket }}">{{ supermarket }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>        
+      <button type="submit" class="action-btn">הרשמה</button>
+      <div id="error-message" class="error-message"></div>
+      <div id="success-message" class="success-message"></div>
+    </form>
+  </div>
+  <script src="{{ url_for('signup.static', filename='js/signup.js') }}"></script>
+{%endblock%}

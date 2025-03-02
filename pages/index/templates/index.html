@@ -1,0 +1,31 @@
+{%extends 'base.html'%}
+
+{%block title%}
+    <title>חבומרקט - דף הבית</title>
+{% endblock%}
+    
+{%block css%}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('index.static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+{% endblock%}
+
+{%block content%}
+    <div>
+      <img class="bg-img" src="{{ url_for('static', filename='media/img/3000X3000.jpg') }}" alt="Background Image">
+    </div>
+
+    <div class="text-container">
+      <h1>חוסכים במשלוח מהסופר ב-3 שלבים פשוטים</h1>
+      <h2>1. ממלאים פרטים</h2>
+      <h2>2. מחכים לוואצאפ על מציאת התאמה עבורכם</h2>
+      <h2>3. מבצעים הזמנה משותפת</h2>
+
+      {% if not is_logged_in %}
+      <div class="button-container">
+        <a href="{{ url_for('signup.create_signup_page') }}" class="action-btn">הרשמה</a>
+        <a href="{{ url_for('login.create_login_page') }}" class="action-btn">התחברות</a>
+      </div>
+      {% endif %}
+    </div>
+{% endblock%}
