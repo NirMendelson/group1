@@ -24,7 +24,7 @@ Once logged in, a user can access their profile page where he can:
 - View all past and upcoming deliveries made through the website.
 - Cancel upcoming delivery.
 - Update their details.
-- Delete theis profile.
+- Delete their profile.
 
 ### 5. Website flow
 Home Page -> Sign in/Login -> Delivery -> Profile ->  Logout
