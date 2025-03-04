@@ -30,3 +30,5 @@ Once logged in, a user can access their profile page where he can:
 Home Page -> Sign in/Login -> Delivery -> Profile ->  Logout
 -If a user tries to create a delivery before signing in or logging in, they will receive a message prompting them to log in first.
 -Once logged in, the user will be able to access their profile page or log out.
+
+Note: We added an updated version of the ERD that matches the collections we created in this part of the project.
